@@ -6,6 +6,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var morgan = require('morgan');
+var _ = require('lodash');
+var cors = require('cors');
+
+app.use(cors());
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
@@ -54,6 +58,18 @@ router.get('/', function (req, res) {
 
 router.route('/events')
 
+    // get all events endpoint
+    .get(function (req, res) {
+        Event.find(function (err, events) {
+            if (err) {
+                res.send(err);
+            }
+            events = _.groupBy(events, 'day')
+            res.json(events);
+        });
+    })
+
+    // add event endpoint
 	.post(function (req, res) {
 
 		var event = new Event();
@@ -71,6 +87,42 @@ router.route('/events')
 
 
     })
+
+router.route('/events/:id')
+
+    // update event endpoint
+    .put(function (req, res) {
+        Event.findById(req.params.id, function (err, event) {
+
+            if (err)
+                res.send(err);
+
+            event.name = req.body.name;
+            event.save(function (err) {
+                if (err)
+                    res.send(err);
+
+                res.json({
+                    message: 'Event updated!'
+                });
+            });
+
+        });
+    })
+
+    // delete event endpoint
+    .delete(function (req, res) {
+        Event.remove({
+            _id: req.params.id
+        }, function (err, event) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Successfully deleted'
+            });
+        });
+    });
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);
