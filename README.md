@@ -1,18 +1,17 @@
-# Building a RESTful API in Node and Express
+# RESTful API in Node and Express for TODO application
 
-Using the new Express 4.0 Router to build an API
-
-[Read the tutorial](http://scotch.io/tutorials/javascript/build-a-restful-api-using-node-and-express-4)
 
 ## Requirements
 
-- Node and npm
+- Node, Yarn or npm
 
 ## Installation
 
-- Clone the repo: `https://github.com/vittaljk/mean-starter`
-- Install dependencies: `npm install`
-- Start the server: `node server.js`
+- Clone the repo: `https://github.com/vittaljk/todo-server`
+- Install node version v10.13.0
+- Install dependencies: `yarn install`
+- Start the server: `yarn start`
+- your server will be running in `http://localhost:8080/api`
 
-## Testing the API
-Test your API using [Postman](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop)
+
+example `http://localhost:8080/api/events` will fetch all the events
