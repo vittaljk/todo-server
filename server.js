@@ -7,9 +7,8 @@ var bodyParser = require('body-parser');
 var app = express();
 var morgan = require('morgan');
 var _ = require('lodash');
-var cors = require('cors');
 
-app.use(cors());
+app.use();
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
